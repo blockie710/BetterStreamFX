@@ -6,7 +6,7 @@ StreamFX is a powerful plugin for the popular OBS Studio streaming platform, pac
 ++++
 
 === Licenses
-Licensed under link:https://github.com/Xaymar/obs-StreamFX/blob/root/LICENSE[GPLv3 (or later), see LICENSE]. Additional works included are:
+Licensed under link:LICENSE[GPLv3 (or later), see LICENSE]. Additional works included are:
 
 [options="header"]
 |=================
