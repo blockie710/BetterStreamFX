@@ -324,6 +324,10 @@ if(STANDALONE)
 	set(FFmpeg_DIR "" CACHE PATH "Path to FFmpeg")
 endif()
 set(AOM_DIR "" CACHE PATH "Path to AOM library")
+# libdatachannel is discovered by FindLibDataChannel.cmake via pkg-config
+# and standard hint paths; this cache variable lets users point at a custom
+# install location (LIBDATACHANNEL_PATH / LIBDATACHANNEL_PATH64 env also work).
+set(LIBDATACHANNEL_PATH "" CACHE PATH "Path to libdatachannel root (contains include/rtc and lib/)")
 
 ################################################################################
 # Project
@@ -367,6 +371,7 @@ list(APPEND CMAKE_PREFIX_PATH
 	"${Qt5_DIR}"
 	"${Qt6_DIR}"
 	"${QTDIR}"
+	"${LIBDATACHANNEL_PATH}"
 )
 if(D_PLATFORM_MAC)
 	list(APPEND CMAKE_PREFIX_PATH
@@ -426,7 +431,25 @@ if(NOT TARGET OBS::obs-frontend-api)
 endif()
 
 #- CURL
-find_package("CURL")
+# Locate libcurl using CMake's built-in FindCURL module (preferred), which
+# provides the CURL::libcurl imported target. If that fails, fall back to
+# pkg_check_modules which is the same strategy used by FindFFmpeg.cmake.
+find_package("CURL" QUIET)
+if(NOT TARGET CURL::libcurl)
+	find_package(PkgConfig QUIET)
+	if(PkgConfig_FOUND)
+		pkg_check_modules(LIBCURL IMPORTED_TARGET libcurl)
+		if(TARGET PkgConfig::LIBCURL)
+			add_library(CURL::libcurl ALIAS PkgConfig::LIBCURL)
+		endif()
+	endif()
+endif()
+if(TARGET CURL::libcurl)
+	set(CURL_FOUND ON)
+else()
+	set(CURL_FOUND OFF)
+	message(STATUS "libcurl was not found; updater functionality will be unavailable.")
+endif()
 
 #- JSON
 if(NOT EXISTS "${PROJECT_SOURCE_DIR}/third-party/nlohmann-json/single_include")
@@ -441,6 +464,31 @@ find_package("Qt6"
 	COMPONENTS Core Gui Widgets
 	CONFIG
 )
+
+#- libdatachannel (WebRTC/WhepWhip networking)
+# Primary discovery path: upstream ships CMake config files
+# (LibDataChannelConfig.cmake, LibDataChannelTargets.cmake), so
+# find_package CONFIG mode finds them when libdatachannel is installed
+# from source or via vcpkg. The MODULE fallback (FindLibDataChannel.cmake
+# in cmake/modules/) uses pkg-config + find_path/find_library hints for
+# distro packages that ship a .pc file or for manual install locations
+# pointed at via LIBDATACHANNEL_PATH / LIBDATACHANNEL_PATH64.
+#
+# Discovery is UNCONDITIONAL (not guarded by STANDALONE) to match the CURL
+# convention (find_package("CURL" QUIET) at line 437). The downstream link
+# block at lines 1098-1107 is guarded by if(TARGET ...) so the build does
+# not hard-fail when libdatachannel is absent — matching the documented
+# cmake_dependency_conventions.md pattern (CURL lines 1067-1071).
+find_package("LibDataChannel" CONFIG QUIET)
+if(NOT TARGET LibDataChannel::LibDataChannel)
+	find_package("LibDataChannel" MODULE QUIET)
+endif()
+if(TARGET LibDataChannel::LibDataChannel)
+	set(LIBDATACHANNEL_FOUND ON)
+else()
+	set(LIBDATACHANNEL_FOUND OFF)
+	message(STATUS "libdatachannel was not found; WebRTC/WhepWhip transport functionality will be unavailable.")
+endif()
 
 ################################################################################
 # Helpers
@@ -1035,13 +1083,33 @@ set_target_properties(StreamFX_Core PROPERTIES
 # Default Links
 target_link_libraries(StreamFX_Core
 	PUBLIC
-		CURL::libcurl
 		Qt6::Core
 		Qt6::Gui
 		Qt6::Widgets
 		OBS::obs-frontend-api
 		OBS::libobs
 )
+
+# CURL: link only when found, guarded so the build does not hard-fail
+# when libcurl is unavailable. The CURL::libcurl imported target carries
+# its own INTERFACE_INCLUDE_DIRECTORIES, but we set them explicitly as well
+# to stay consistent with how other dependencies are wired in this file.
+if(TARGET CURL::libcurl)
+	target_link_libraries(StreamFX_Core PUBLIC CURL::libcurl)
+	target_include_directories(StreamFX_Core PRIVATE ${CURL_INCLUDE_DIRS})
+	target_compile_definitions(StreamFX_Core PUBLIC HAS_LIBCURL)
+endif()
+
+# libdatachannel: link only when found, guarded so the build does not
+# hard-fail when libdatachannel is unavailable. The imported target
+# LibDataChannel::LibDataChannel carries its own INTERFACE_INCLUDE_DIRECTORIES,
+# but we pass ${LIBDATACHANNEL_INCLUDE_DIRS} explicitly as well to stay
+# consistent with how other dependencies are wired in this file (see CURL).
+if(TARGET LibDataChannel::LibDataChannel)
+	target_link_libraries(StreamFX_Core PUBLIC LibDataChannel::LibDataChannel)
+	target_include_directories(StreamFX_Core PRIVATE ${LIBDATACHANNEL_INCLUDE_DIRS})
+	target_compile_definitions(StreamFX_Core PUBLIC HAS_LIBDATACHANNEL)
+endif()
 
 # Default Include Dirs
 target_include_directories(StreamFX_Core 
