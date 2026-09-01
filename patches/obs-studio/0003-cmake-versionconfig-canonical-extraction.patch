@@ -1,0 +1,29 @@
+diff --git a/cmake/common/versionconfig.cmake b/cmake/common/versionconfig.cmake
+index 7a1e75312..2558cc736 100644
+--- a/cmake/common/versionconfig.cmake
++++ b/cmake/common/versionconfig.cmake
+@@ -21,17 +21,15 @@ if(NOT DEFINED OBS_VERSION_OVERRIDE AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git
+   endif()
+ 
+   if(_obs_version_result EQUAL 0)
+-    string(REGEX REPLACE "([0-9]+)\\.([0-9]+)\\.([0-9]+).*" "\\1;\\2;\\3" _obs_version_canonical ${_obs_version})
++    if(_obs_version MATCHES "([0-9]+)\\.([0-9]+)\\.([0-9]+)")
++      set(_obs_version_canonical "${CMAKE_MATCH_1};${CMAKE_MATCH_2};${CMAKE_MATCH_3}")
++    else()
++      set(_obs_version_canonical "0;0;0")
++    endif()
+   endif()
+ elseif(DEFINED OBS_VERSION_OVERRIDE)
+-  if(OBS_VERSION_OVERRIDE MATCHES "([0-9]+)\\.([0-9]+)\\.([0-9]+).*")
+-    string(
+-      REGEX REPLACE
+-      "([0-9]+)\\.([0-9]+)\\.([0-9]+).*"
+-      "\\1;\\2;\\3"
+-      _obs_version_canonical
+-      ${OBS_VERSION_OVERRIDE}
+-    )
++  if(OBS_VERSION_OVERRIDE MATCHES "([0-9]+)\\.([0-9]+)\\.([0-9]+)")
++    set(_obs_version_canonical "${CMAKE_MATCH_1};${CMAKE_MATCH_2};${CMAKE_MATCH_3}")
+     set(_obs_version ${OBS_VERSION_OVERRIDE})
+   else()
+     message(FATAL_ERROR "Invalid version supplied - must be <MAJOR>.<MINOR>.<PATCH>[-(rc|beta)<NUMBER>].")
