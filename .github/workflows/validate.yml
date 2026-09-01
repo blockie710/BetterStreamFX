@@ -61,7 +61,7 @@ jobs:
     - name: "Verify SPDX Headers"
       shell: bash
       run: |
-        missing=$(find source/ -type f \( -name '*.cpp' -o -name '*.hpp' -o -name '*.cc' -o -name '*.h' -o -name '*.cu' -o -name '*.cl' -o -name '*.glsl' -o -name '*.vert' -o -name '*.frag' \) | while read f; do
+        missing=$(find source/ components/ -type f \( -name '*.cpp' -o -name '*.hpp' -o -name '*.cc' -o -name '*.h' -o -name '*.cu' -o -name '*.cl' -o -name '*.glsl' -o -name '*.vert' -o -name '*.frag' -o -name '*.cmake' -o -name 'CMakeLists.txt' \) | while read f; do
           if ! grep -q "SPDX-License-Identifier: GPL-3.0-or-later" "$f"; then echo "$f"; fi
         done)
         if [ -n "$missing" ]; then
