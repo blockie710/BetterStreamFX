@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 # Usage
 # - Call argparse after registering all Options and Commands.
@@ -140,4 +141,3 @@ function argparse {
 # 			return ${RET_NO_ARGS}
 # 	esac
 # }
-

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 # check-proprietary-boundary.sh — GPL/proprietary isolation compliance gate.
 #
 # Builds with BUILD_PROPRIETARY=OFF and verifies that:
