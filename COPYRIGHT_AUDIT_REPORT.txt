@@ -1,0 +1,374 @@
+======================================================================
+COPYRIGHT HEADER AUDIT REPORT — nova-obs-fork (t_5690dbe0)
+======================================================================
+
+TOTAL SOURCE FILES AUDITED: 218
+
+Files WITH header:          218
+Files MISSING header:        0
+Header canonical (2017-2023 sole): 43
+Header year variants:        175
+Files with 'lainon' line:    60
+
+--- MISSING HEADER FILES ---
+  (none)
+
+--- YEAR-RANGE VARIANTS ---
+
+  2017-2023 (21 files):
+    components\blur\source\filter\filter-blur.cpp
+    components\mirror\source\sources\source-mirror.cpp
+    components\nvidia\include\nvidia\cuda\nvidia-cuda-context.hpp
+    components\shader\source\filters\filter-shader.cpp
+    components\shader\source\filters\filter-shader.hpp
+    components\shader\source\sources\source-shader.hpp
+    components\transform\source\filter\filter-transform.cpp
+    source\gfx\gfx-mipmapper.cpp
+    source\obs\gs\gs-effect-pass.cpp
+    source\obs\gs\gs-effect-pass.hpp
+    source\obs\gs\gs-effect-technique.hpp
+    source\obs\gs\gs-effect.cpp
+    source\obs\gs\gs-effect.hpp
+    source\obs\gs\gs-mipmapper.cpp
+    source\obs\gs\gs-rendertarget.cpp
+    source\obs\gs\gs-rendertarget.hpp
+    source\obs\gs\gs-vertexbuffer.cpp
+    source\obs\gs\gs-vertexbuffer.hpp
+    source\util\util-event.hpp
+    source\util\util-logging.cpp
+    source\util\utility.cpp
+
+  2018-2023 (10 files):
+    components\sdf-effects\source\filters\filter-sdf-effects.cpp
+    components\sdf-effects\source\filters\filter-sdf-effects.hpp
+    components\shader\source\gfx\shader\gfx-shader.cpp
+    components\shader\source\gfx\shader\gfx-shader.hpp
+    source\gfx\gfx-source-texture.cpp
+    source\gfx\gfx-source-texture.hpp
+    source\obs\gs\gs-sampler.cpp
+    source\obs\obs-source.cpp
+    source\obs\obs-tools.cpp
+    source\util\utility.hpp
+
+  2019-2023 (33 files):
+    components\blur\source\gfx\blur\gfx-blur-base.cpp
+    components\blur\source\gfx\blur\gfx-blur-base.hpp
+    components\blur\source\gfx\blur\gfx-blur-box-linear.cpp
+    components\blur\source\gfx\blur\gfx-blur-box-linear.hpp
+    components\blur\source\gfx\blur\gfx-blur-box.cpp
+    components\blur\source\gfx\blur\gfx-blur-box.hpp
+    components\blur\source\gfx\blur\gfx-blur-dual-filtering.cpp
+    components\blur\source\gfx\blur\gfx-blur-dual-filtering.hpp
+    components\blur\source\gfx\blur\gfx-blur-gaussian-linear.cpp
+    components\blur\source\gfx\blur\gfx-blur-gaussian-linear.hpp
+    components\blur\source\gfx\blur\gfx-blur-gaussian.cpp
+    components\blur\source\gfx\blur\gfx-blur-gaussian.hpp
+    components\color-grade\source\filters\filter-color-grade.cpp
+    components\color-grade\source\filters\filter-color-grade.hpp
+    components\dynamic-mask\source\filters\filter-dynamic-mask.cpp
+    components\dynamic-mask\source\filters\filter-dynamic-mask.hpp
+    components\shader\source\gfx\shader\gfx-shader-param-audio.cpp
+    components\shader\source\gfx\shader\gfx-shader-param-audio.hpp
+    components\shader\source\gfx\shader\gfx-shader-param-basic.cpp
+    components\shader\source\gfx\shader\gfx-shader-param-basic.hpp
+    components\shader\source\gfx\shader\gfx-shader-param-matrix.cpp
+    components\shader\source\gfx\shader\gfx-shader-param-matrix.hpp
+    components\shader\source\gfx\shader\gfx-shader-param-texture.cpp
+    components\shader\source\gfx\shader\gfx-shader-param-texture.hpp
+    components\shader\source\gfx\shader\gfx-shader-param.cpp
+    components\shader\source\gfx\shader\gfx-shader-param.hpp
+    components\shader\source\sources\source-shader.cpp
+    source\obs\gs\gs-effect-parameter.cpp
+    source\obs\gs\gs-effect-parameter.hpp
+    source\obs\gs\gs-effect-technique.cpp
+    source\obs\obs-source-factory.hpp
+    source\obs\obs-source-tracker.cpp
+    source\obs\obs-source-tracker.hpp
+
+  2020-2023 (64 files):
+    components\color-grade\source\gfx\lut\gfx-lut-consumer.hpp
+    components\color-grade\source\gfx\lut\gfx-lut-producer.hpp
+    components\color-grade\source\gfx\lut\gfx-lut.hpp
+    components\ffmpeg\source\encoders\codecs\av1.cpp
+    components\ffmpeg\source\encoders\codecs\av1.hpp
+    components\ffmpeg\source\encoders\codecs\dnxhr.hpp
+    components\ffmpeg\source\encoders\codecs\h264.cpp
+    components\ffmpeg\source\encoders\codecs\h264.hpp
+    components\ffmpeg\source\encoders\codecs\hevc.cpp
+    components\ffmpeg\source\encoders\codecs\hevc.hpp
+    components\ffmpeg\source\encoders\codecs\prores.cpp
+    components\ffmpeg\source\encoders\codecs\prores.hpp
+    components\ffmpeg\source\encoders\encoder-ffmpeg.cpp
+    components\ffmpeg\source\encoders\encoder-ffmpeg.hpp
+    components\ffmpeg\source\encoders\ffmpeg\amf.cpp
+    components\ffmpeg\source\encoders\ffmpeg\debug.cpp
+    components\ffmpeg\source\encoders\ffmpeg\dnxhd.hpp
+    components\ffmpeg\source\encoders\ffmpeg\handler.cpp
+    components\ffmpeg\source\encoders\ffmpeg\handler.hpp
+    components\ffmpeg\source\encoders\ffmpeg\nvenc.cpp
+    components\ffmpeg\source\encoders\ffmpeg\prores_aw.cpp
+    components\ffmpeg\source\encoders\ffmpeg\prores_aw.hpp
+    components\ffmpeg\source\ffmpeg\avframe-queue.cpp
+    components\ffmpeg\source\ffmpeg\avframe-queue.hpp
+    components\ffmpeg\source\ffmpeg\hwapi\base.cpp
+    components\ffmpeg\source\ffmpeg\hwapi\base.hpp
+    components\ffmpeg\source\ffmpeg\hwapi\d3d11.cpp
+    components\ffmpeg\source\ffmpeg\hwapi\d3d11.hpp
+    components\ffmpeg\source\ffmpeg\swscale.cpp
+    components\ffmpeg\source\ffmpeg\swscale.hpp
+    components\ffmpeg\source\ffmpeg\tools.cpp
+    components\ffmpeg\source\ffmpeg\tools.hpp
+    components\nvidia\include\nvidia\ar\nvidia-ar-feature.hpp
+    components\nvidia\include\nvidia\ar\nvidia-ar.hpp
+    components\nvidia\include\nvidia\cuda\nvidia-cuda.hpp
+    components\nvidia\include\nvidia\cv\nvidia-cv-image.hpp
+    components\nvidia\include\nvidia\cv\nvidia-cv-texture.hpp
+    components\nvidia\source\nvidia\cuda\nvidia-cuda-context.cpp
+    components\nvidia\source\nvidia\cuda\nvidia-cuda-gs-texture.cpp
+    components\nvidia\source\nvidia\cuda\nvidia-cuda.cpp
+    components\shader\source\transitions\transition-shader.cpp
+    source\configuration.cpp
+    source\gfx\gfx-opengl.hpp
+    source\gfx\gfx-util.hpp
+    source\obs\obs-encoder-factory.hpp
+    source\obs\obs-signal-handler.hpp
+    source\ui\ui-about-entry.cpp
+    source\ui\ui-about.cpp
+    source\ui\ui-about.hpp
+    source\ui\ui-updater.cpp
+    source\ui\ui-updater.hpp
+    source\ui\ui.cpp
+    source\ui\ui.hpp
+    source\updater.cpp
+    source\updater.hpp
+    source\util\util-bitmask.hpp
+    source\util\util-curl.cpp
+    source\util\util-curl.hpp
+    source\util\util-library.cpp
+    source\util\util-library.hpp
+    source\util\util-logging.hpp
+    source\util\util-profiler.cpp
+    source\util\util-profiler.hpp
+    source\util\util-threadpool.cpp
+
+  2021-2023 (33 files):
+    components\autoframing\source\filters\filter-autoframing.cpp
+    components\autoframing\source\filters\filter-autoframing.hpp
+    components\color-grade\source\gfx\lut\gfx-lut-consumer.cpp
+    components\color-grade\source\gfx\lut\gfx-lut-producer.cpp
+    components\color-grade\source\gfx\lut\gfx-lut.cpp
+    components\denoising\source\filters\filter-denoising.cpp
+    components\denoising\source\filters\filter-denoising.hpp
+    components\nvidia\include\nvidia\ar\nvidia-ar-facedetection.hpp
+    components\nvidia\include\nvidia\cv\nvidia-cv.hpp
+    components\nvidia\include\nvidia\vfx\nvidia-vfx-denoising.hpp
+    components\nvidia\include\nvidia\vfx\nvidia-vfx-effect.hpp
+    components\nvidia\include\nvidia\vfx\nvidia-vfx-greenscreen.hpp
+    components\nvidia\include\nvidia\vfx\nvidia-vfx-superresolution.hpp
+    components\nvidia\include\nvidia\vfx\nvidia-vfx.hpp
+    components\nvidia\source\nvidia\ar\nvidia-ar-facedetection.cpp
+    components\nvidia\source\nvidia\ar\nvidia-ar-feature.cpp
+    components\nvidia\source\nvidia\ar\nvidia-ar.cpp
+    components\nvidia\source\nvidia\cv\nvidia-cv-image.cpp
+    components\nvidia\source\nvidia\cv\nvidia-cv-texture.cpp
+    components\nvidia\source\nvidia\cv\nvidia-cv.cpp
+    components\nvidia\source\nvidia\vfx\nvidia-vfx-denoising.cpp
+    components\nvidia\source\nvidia\vfx\nvidia-vfx-effect.cpp
+    components\nvidia\source\nvidia\vfx\nvidia-vfx-greenscreen.cpp
+    components\nvidia\source\nvidia\vfx\nvidia-vfx-superresolution.cpp
+    components\nvidia\source\nvidia\vfx\nvidia-vfx.cpp
+    components\upscaling\source\filters\filter-upscaling.cpp
+    components\upscaling\source\filters\filter-upscaling.hpp
+    components\virtual-greenscreen\source\filters\filter-virtual-greenscreen.cpp
+    components\virtual-greenscreen\source\filters\filter-virtual-greenscreen.hpp
+    source\gfx\gfx-opengl.cpp
+    source\gfx\gfx-util.cpp
+    source\util\util-platform.cpp
+    source\util\util-platform.hpp
+
+  2022-2023 (5 files):
+    components\ffmpeg\source\encoders\ffmpeg\dnxhd.cpp
+    source\obs\obs-source-active-child.hpp
+    source\obs\obs-weak-source.hpp
+    source\warning-disable.hpp
+    source\warning-enable.hpp
+
+  2023 (9 files):
+    components\ffmpeg\source\encoders\codecs\dnxhr.cpp
+    components\ffmpeg\source\encoders\ffmpeg\amf.hpp
+    components\ffmpeg\source\encoders\ffmpeg\cfhd.cpp
+    components\ffmpeg\source\encoders\ffmpeg\cfhd.hpp
+    components\ffmpeg\source\encoders\ffmpeg\debug.hpp
+    components\ffmpeg\source\encoders\ffmpeg\nvenc.hpp
+    source\obs\browser\obs-browser-panel.hpp
+    source\ui\ui-obs-browser-widget.cpp
+    source\ui\ui-obs-browser-widget.hpp
+
+--- LAINON FILES ---
+  components\autoframing\source\filters\filter-autoframing.cpp
+  components\blur\source\gfx\blur\gfx-blur-box-linear.cpp
+  components\blur\source\gfx\blur\gfx-blur-box.cpp
+  components\blur\source\gfx\blur\gfx-blur-dual-filtering.cpp
+  components\blur\source\gfx\blur\gfx-blur-gaussian-linear.cpp
+  components\blur\source\gfx\blur\gfx-blur-gaussian.cpp
+  components\color-grade\source\gfx\lut\gfx-lut-consumer.cpp
+  components\color-grade\source\gfx\lut\gfx-lut-producer.cpp
+  components\dynamic-mask\source\filters\filter-dynamic-mask.cpp
+  components\ffmpeg\source\encoders\encoder-ffmpeg.cpp
+  components\ffmpeg\source\encoders\encoder-ffmpeg.hpp
+  components\ffmpeg\source\encoders\ffmpeg\dnxhd.cpp
+  components\ffmpeg\source\encoders\ffmpeg\nvenc.cpp
+  components\ffmpeg\source\ffmpeg\avframe-queue.cpp
+  components\ffmpeg\source\ffmpeg\hwapi\base.hpp
+  components\ffmpeg\source\ffmpeg\hwapi\d3d11.cpp
+  components\ffmpeg\source\ffmpeg\hwapi\d3d11.hpp
+  components\ffmpeg\source\ffmpeg\swscale.cpp
+  components\ffmpeg\source\ffmpeg\tools.cpp
+  components\ffmpeg\source\ffmpeg\tools.hpp
+  components\mirror\source\sources\source-mirror.cpp
+  components\nvidia\include\nvidia\cuda\nvidia-cuda-context.hpp
+  components\nvidia\include\nvidia\cv\nvidia-cv.hpp
+  components\nvidia\source\nvidia\ar\nvidia-ar-facedetection.cpp
+  components\nvidia\source\nvidia\cuda\nvidia-cuda-gs-texture.cpp
+  components\nvidia\source\nvidia\vfx\nvidia-vfx-superresolution.cpp
+  components\shader\source\gfx\shader\gfx-shader-param-basic.cpp
+  components\shader\source\gfx\shader\gfx-shader-param-basic.hpp
+  components\shader\source\gfx\shader\gfx-shader-param-texture.cpp
+  components\shader\source\gfx\shader\gfx-shader-param-texture.hpp
+  components\shader\source\gfx\shader\gfx-shader-param.cpp
+  components\shader\source\gfx\shader\gfx-shader-param.hpp
+  components\shader\source\gfx\shader\gfx-shader.cpp
+  components\shader\source\gfx\shader\gfx-shader.hpp
+  components\transform\source\filter\filter-transform.cpp
+  source\gfx\gfx-mipmapper.cpp
+  source\gfx\gfx-util.cpp
+  source\obs\gs\gs-effect-parameter.cpp
+  source\obs\gs\gs-effect-pass.cpp
+  source\obs\gs\gs-effect-pass.hpp
+  source\obs\gs\gs-effect-technique.cpp
+  source\obs\gs\gs-effect-technique.hpp
+  source\obs\gs\gs-effect.cpp
+  source\obs\gs\gs-effect.hpp
+  source\obs\gs\gs-mipmapper.cpp
+  source\obs\gs\gs-rendertarget.cpp
+  source\obs\gs\gs-rendertarget.hpp
+  source\obs\gs\gs-vertexbuffer.cpp
+  source\obs\gs\gs-vertexbuffer.hpp
+  source\obs\obs-encoder-factory.hpp
+  source\obs\obs-signal-handler.hpp
+  source\obs\obs-source-factory.hpp
+  source\ui\ui-about.cpp
+  source\util\util-curl.cpp
+  source\util\util-curl.hpp
+  source\util\util-event.hpp
+  source\util\util-library.cpp
+  source\util\util-threadpool.cpp
+  source\util\utility.cpp
+  source\util\utility.hpp
+
+--- OTHER CONTRIBUTORS ---
+
+  2019 Cat Stevens (1 files):
+    components\blur\source\filter\filter-blur.cpp
+
+  2020 Daniel Molkentin (2 files):
+    components\ffmpeg\source\encoders\encoder-ffmpeg.cpp
+    components\ffmpeg\source\encoders\ffmpeg\debug.cpp
+
+  2021 William Pettersson (1 files):
+    source\util\util-logging.cpp
+
+  2021 coolsoft.rf (11 files):
+    components\shader\source\filters\filter-shader.cpp
+    components\shader\source\filters\filter-shader.hpp
+    components\shader\source\gfx\shader\gfx-shader-param-texture.cpp
+    components\shader\source\gfx\shader\gfx-shader-param-texture.hpp
+    components\shader\source\gfx\shader\gfx-shader-param.cpp
+    components\shader\source\gfx\shader\gfx-shader-param.hpp
+    components\shader\source\gfx\shader\gfx-shader.cpp
+    components\shader\source\gfx\shader\gfx-shader.hpp
+    components\shader\source\sources\source-shader.cpp
+    components\shader\source\sources\source-shader.hpp
+    components\shader\source\transitions\transition-shader.cpp
+
+  2021 tytan652 (1 files):
+    source\ui\ui.cpp
+
+  2022 Carsten Braun (4 files):
+    components\ffmpeg\source\encoders\codecs\dnxhr.cpp
+    components\ffmpeg\source\encoders\codecs\dnxhr.hpp
+    components\ffmpeg\source\encoders\encoder-ffmpeg.cpp
+    components\ffmpeg\source\encoders\ffmpeg\dnxhd.cpp
+
+  2022 Chris Pence (1 files):
+    components\ffmpeg\source\encoders\encoder-ffmpeg.cpp
+
+  2022 lainon (60 files):
+    components\autoframing\source\filters\filter-autoframing.cpp
+    components\blur\source\gfx\blur\gfx-blur-box-linear.cpp
+    components\blur\source\gfx\blur\gfx-blur-box.cpp
+    components\blur\source\gfx\blur\gfx-blur-dual-filtering.cpp
+    components\blur\source\gfx\blur\gfx-blur-gaussian-linear.cpp
+    components\blur\source\gfx\blur\gfx-blur-gaussian.cpp
+    components\color-grade\source\gfx\lut\gfx-lut-consumer.cpp
+    components\color-grade\source\gfx\lut\gfx-lut-producer.cpp
+    components\dynamic-mask\source\filters\filter-dynamic-mask.cpp
+    components\ffmpeg\source\encoders\encoder-ffmpeg.cpp
+    components\ffmpeg\source\encoders\encoder-ffmpeg.hpp
+    components\ffmpeg\source\encoders\ffmpeg\dnxhd.cpp
+    components\ffmpeg\source\encoders\ffmpeg\nvenc.cpp
+    components\ffmpeg\source\ffmpeg\avframe-queue.cpp
+    components\ffmpeg\source\ffmpeg\hwapi\base.hpp
+    components\ffmpeg\source\ffmpeg\hwapi\d3d11.cpp
+    components\ffmpeg\source\ffmpeg\hwapi\d3d11.hpp
+    components\ffmpeg\source\ffmpeg\swscale.cpp
+    components\ffmpeg\source\ffmpeg\tools.cpp
+    components\ffmpeg\source\ffmpeg\tools.hpp
+    components\mirror\source\sources\source-mirror.cpp
+    components\nvidia\include\nvidia\cuda\nvidia-cuda-context.hpp
+    components\nvidia\include\nvidia\cv\nvidia-cv.hpp
+    components\nvidia\source\nvidia\ar\nvidia-ar-facedetection.cpp
+    components\nvidia\source\nvidia\cuda\nvidia-cuda-gs-texture.cpp
+    components\nvidia\source\nvidia\vfx\nvidia-vfx-superresolution.cpp
+    components\shader\source\gfx\shader\gfx-shader-param-basic.cpp
+    components\shader\source\gfx\shader\gfx-shader-param-basic.hpp
+    components\shader\source\gfx\shader\gfx-shader-param-texture.cpp
+    components\shader\source\gfx\shader\gfx-shader-param-texture.hpp
+    components\shader\source\gfx\shader\gfx-shader-param.cpp
+    components\shader\source\gfx\shader\gfx-shader-param.hpp
+    components\shader\source\gfx\shader\gfx-shader.cpp
+    components\shader\source\gfx\shader\gfx-shader.hpp
+    components\transform\source\filter\filter-transform.cpp
+    source\gfx\gfx-mipmapper.cpp
+    source\gfx\gfx-util.cpp
+    source\obs\gs\gs-effect-parameter.cpp
+    source\obs\gs\gs-effect-pass.cpp
+    source\obs\gs\gs-effect-pass.hpp
+    source\obs\gs\gs-effect-technique.cpp
+    source\obs\gs\gs-effect-technique.hpp
+    source\obs\gs\gs-effect.cpp
+    source\obs\gs\gs-effect.hpp
+    source\obs\gs\gs-mipmapper.cpp
+    source\obs\gs\gs-rendertarget.cpp
+    source\obs\gs\gs-rendertarget.hpp
+    source\obs\gs\gs-vertexbuffer.cpp
+    source\obs\gs\gs-vertexbuffer.hpp
+    source\obs\obs-encoder-factory.hpp
+    source\obs\obs-signal-handler.hpp
+    source\obs\obs-source-factory.hpp
+    source\ui\ui-about.cpp
+    source\util\util-curl.cpp
+    source\util\util-curl.hpp
+    source\util\util-event.hpp
+    source\util\util-library.cpp
+    source\util\util-threadpool.cpp
+    source\util\utility.cpp
+    source\util\utility.hpp
+
+  2023 tt2468 (1 files):
+    source\util\util-threadpool.cpp
+
+--- EXPECTED PATTERN ---
+// AUTOGENERATED COPYRIGHT HEADER START
+// Copyright (C) 2017-2023 Michael Fabian 'Xaymar' Dirks <info@xaymar.com>
+// AUTOGENERATED COPYRIGHT HEADER END
