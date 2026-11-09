@@ -15,8 +15,7 @@
 
 # CMake Setup
 cmake_minimum_required(VERSION 3.26)
-list(APPEND CMAKE_MESSAGE_INDENT "[StreamFX] ")
-project(StreamFX)
+list(APPEND CMAKE_MESSAGE_INDENT "[LibreCast Studio] ")
 
 ################################################################################
 # Modules
@@ -342,13 +341,13 @@ version(GENERATE PROJECT_VERSION
 	REQUIRE "PATCH;TWEAK"
 )
 project(
-	StreamFX
-	VERSION ${PROJECT_VERSION}
-	DESCRIPTION "Additional sources, filters, transitions and encoders for OBS Studio."
-	HOMEPAGE_URL "https://streamfx.xaymar.com/"
+    LibreCast Studio
+    VERSION ${PROJECT_VERSION}
+    DESCRIPTION "Additional sources, filters, transitions and encoders for OBS Studio."
+    HOMEPAGE_URL "https://streamfx.xaymar.com/"
 )
-set(PROJECT_IDENTIFER "com.xaymar.StreamFX.obs")
-set(PROJECT_TITLE "StreamFX (for OBS Studio)")
+set(PROJECT_IDENTIFER "com.xaymar.LibreCastStudio.obs")
+set(PROJECT_TITLE "LibreCast Studio (for OBS Studio)")
 set(PROJECT_AUTHORS "Michael Fabian 'Xaymar' Dirks <info@xaymar.com>")
 set(PROJECT_COPYRIGHT "2017 - 2022, Michael Fabian Dirks. All Rights Reserved")
 set(PROJECT_TRADEMARKS "")
@@ -1525,7 +1524,7 @@ if(STANDALONE)
 		set_target_properties(StreamFX PROPERTIES
 			BUNDLE ON
 			BUNDLE_EXTENSION "plugin"
-			OUTPUT_NAME StreamFX
+			OUTPUT_NAME streamfx
 			MACOSX_BUNDLE_INFO_PLIST "${PROJECT_SOURCE_DIR}/templates/macos/Info.plist.in"
 			XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER "${MACOSX_BUNDLE_GUI_IDENTIFIER}"
 		)

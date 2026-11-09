@@ -13,3 +13,10 @@
 # Visual Studio
 /.vs
 /#Build
+
+# Agent worktrees and artifacts
+.worktrees/
+wt/
+__pycache__/
+tools/__pycache__/
+curl_test/

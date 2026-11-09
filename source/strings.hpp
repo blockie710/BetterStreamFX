@@ -6,7 +6,7 @@
 #pragma once
 #include "common.hpp"
 
-#define S_PLUGIN_NAME "StreamFX"
+#define S_PLUGIN_NAME "LibreCast Studio"
 #define S_PREFIX "streamfx-"
 
 #define D_TRANSLATE(x) obs_module_text(x)
