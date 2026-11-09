@@ -19,6 +19,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  license-header:
+    runs-on: ubuntu-24.04
+    name: License Header Gate (SPDX)
+    steps:
+      - name: Clone
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Enforce SPDX headers on all tracked source files
+        shell: bash
+        run: |
+          # Gate: every tracked source TU must carry
+          # SPDX-License-Identifier: GPL-3.0-or-later (see ADR-001).
+          # tools/nexus exits 1 when any file needs changes, 2 on error.
+          mapfile -t FILES < <(git ls-files -- \
+            '*.c' '*.cc' '*.cpp' '*.cxx' \
+            '*.h' '*.hh' '*.hpp' '*.hxx' '*.inl' \
+            '*.py' '*.sh' '*.js')
+
+          if [[ ${#FILES[@]} -eq 0 ]]; then
+            echo "::error::No tracked source files found — license-header gate misconfigured"
+            exit 2
+          fi
+
+          echo "Enforcing SPDX headers on ${#FILES[@]} tracked source files"
+          python3 tools/nexus license-header enforce --dry-run "${FILES[@]}"
+
   proprietary-boundary:
     runs-on: ubuntu-24.04
     name: Proprietary Boundary Gate

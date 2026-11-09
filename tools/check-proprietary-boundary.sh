@@ -10,7 +10,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || echo "")"
+REPO_ROOT="$(cd "$SCRIPT_DIR" && git rev-parse --show-toplevel 2>/dev/null || echo "")"
 
 if [[ -z "$REPO_ROOT" ]]; then
   echo "ERROR: not running inside a git repository; cannot determine REPO_ROOT"
@@ -25,6 +25,12 @@ FORBIDDEN_SOURCE_PATTERNS=(
   "source/nexus/"
 )
 
+# ERE alternation of the forbidden source patterns.
+# NOTE: ${arr[*]} space-joins elements, which produces a literal-space regex
+# that can never match an include path. Join with '|' instead.
+FORBIDDEN_SOURCE_RE="$(printf '%s|' "${FORBIDDEN_SOURCE_PATTERNS[@]}")"
+FORBIDDEN_SOURCE_RE="${FORBIDDEN_SOURCE_RE%|}"
+
 # Symbol patterns to reject in the GPL binary. Update when the proprietary
 # symbol table changes. These are matched with grep -i against nm/objdump
 # output, so they should be distinctive substrings of the mangled or unmangled
@@ -32,6 +38,8 @@ FORBIDDEN_SOURCE_PATTERNS=(
 FORBIDDEN_SYMBOL_PATTERNS=(
   "dbscan"
 )
+FORBIDDEN_SYMBOL_RE="$(printf '%s|' "${FORBIDDEN_SYMBOL_PATTERNS[@]}")"
+FORBIDDEN_SYMBOL_RE="${FORBIDDEN_SYMBOL_RE%|}"
 
 # Build configuration for the compliance build.
 BUILD_DIR="${BUILD_DIR:-build/compliance}"
@@ -55,13 +63,13 @@ info "Scanning source tree for forbidden include paths..."
 violations=0
 while IFS= read -r -d '' file; do
   rel="${file#$REPO_ROOT/}"
-  if grep -nE '#include[[:space:]]+["<]' "$file" | grep -iE "${FORBIDDEN_SOURCE_PATTERNS[*]}" > /tmp/proprietary-include-violation.tmp; then
+  if grep -nE '#include[[:space:]]+["<]' "$file" | grep -iE "$FORBIDDEN_SOURCE_RE" > /tmp/proprietary-include-violation.tmp; then
     echo "=== Violation in $rel ==="
     cat /tmp/proprietary-include-violation.tmp
     rm -f /tmp/proprietary-include-violation.tmp
     violations=$((violations + 1))
   fi
-done < <(git -C "$REPO_ROOT" ls-files '*.cpp' '*.c' '*.hpp' '*.h' '*.cc' '*.hh' | while IFS= read -r f; do echo "$REPO_ROOT/$f"; done)
+done < <(git -C "$REPO_ROOT" ls-files -z '*.cpp' '*.c' '*.hpp' '*.h' '*.cc' '*.hh' | while IFS= read -r -d '' f; do printf '%s\0' "$REPO_ROOT/$f"; done)
 
 if [[ "$violations" -gt 0 ]]; then
   failure "found $violations source file(s) that include a proprietary path"
@@ -90,9 +98,9 @@ if [[ -z "$binary" ]]; then
 else
   info "Inspecting: $binary"
   if command -v nm >/dev/null 2>&1; then
-    nm -C "$binary" 2>/dev/null | grep -iE "${FORBIDDEN_SYMBOL_PATTERNS[*]}" > /tmp/proprietary-symbol-violation.tmp || true
+    nm -C "$binary" 2>/dev/null | grep -iE "$FORBIDDEN_SYMBOL_RE" > /tmp/proprietary-symbol-violation.tmp || true
   elif command -v objdump >/dev/null 2>&1; then
-    objdump -t "$binary" 2>/dev/null | grep -iE "${FORBIDDEN_SYMBOL_PATTERNS[*]}" > /tmp/proprietary-symbol-violation.tmp || true
+    objdump -t "$binary" 2>/dev/null | grep -iE "$FORBIDDEN_SYMBOL_RE" > /tmp/proprietary-symbol-violation.tmp || true
   else
     echo "WARNING: neither nm nor objdump found; skipping symbol scan"
   fi

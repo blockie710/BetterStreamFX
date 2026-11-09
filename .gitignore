@@ -13,3 +13,37 @@
 # Visual Studio
 /.vs
 /#Build
+
+# Build trees & scratch test dirs
+build*/
+test_*/
+test_*.cmake
+version_test.cmake
+*.bak
+*.backup
+*.zip
+*.json
+!compile_commands.json
+nexus
+tools/nexus
+
+# Transient scratch audit scripts
+add_spdx.py
+final_spdx.py
+fix_spdx.py
+update_ci.py
+validate_ci.py
+verify_spdx*.py
+
+# Baseline Secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*wallet*
+*secret*
+*token*
+*.Zone.Identifier
